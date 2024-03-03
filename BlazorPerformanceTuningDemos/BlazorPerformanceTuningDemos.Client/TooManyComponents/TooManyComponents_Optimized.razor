@@ -5,19 +5,21 @@
 <HxButton OnClick="StateHasChanged" Text="Rerender" Color="ThemeColor.Primary" />
 
 <table class="table">
-	@foreach (var i in Enumerable.Range(1, 1000))
-	{
-		<tr>
-			<td>@i</td>
-			<td>@_badge("OK")</td>
-			<td>
-				@_icon(BootstrapIcon.Floppy)
-				@_icon(BootstrapIcon.Pencil)
-				@_icon(BootstrapIcon.Copy)
-				@_icon(BootstrapIcon.Trash)
-			</td>
-		</tr>
-	}
+	<tbody>
+		@foreach (var i in Enumerable.Range(1, 1000))
+		{
+			<tr>
+				<td>@i</td>
+				<td>@_badge("OK")</td>
+				<td>
+					@_icon(BootstrapIcon.Floppy)
+					@_icon(BootstrapIcon.Pencil)
+					@_icon(BootstrapIcon.Copy)
+					@_icon(BootstrapIcon.Trash)
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
 
 @code {
