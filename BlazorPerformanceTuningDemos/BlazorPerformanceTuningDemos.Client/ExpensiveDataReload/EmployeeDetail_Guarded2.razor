@@ -1,0 +1,48 @@
+﻿<h4 class="pt-3">@(_employeeDto?.Name ?? "EmployeeDetail")</h4>
+
+@if (_employeeDto != null)
+{
+	<EditForm Model="_employeeDto">
+		<HxInputText Label="Name" @bind-Value="_employeeDto.Name" />
+		<HxSubmit Color="ThemeColor.Primary" OnValidClick="HandleSave">Save</HxSubmit>
+	</EditForm>
+}
+
+@code {
+	[Parameter] public int EmployeeId { get; set; }
+	[Parameter] public EventCallback OnEmployeeUpdated { get; set; }
+
+	[Inject] protected IDemoDataService DemoDataService { get; set; }
+
+	private int? _currentEmployeeId;
+	private EmployeeDto _employeeDto;
+	private bool _shouldRender = true;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		Console.WriteLine($"EmployeeDetail.OnParametersSetAsync: {EmployeeId}");
+
+		if (_currentEmployeeId != EmployeeId)
+		{
+			_currentEmployeeId = EmployeeId;
+			_employeeDto = await DemoDataService.GetEmployeeDetailAsync(EmployeeId);
+			_shouldRender = true;
+		}
+		else
+		{
+			_shouldRender = false;
+		}
+	}
+
+	protected override bool ShouldRender()
+	{
+		return _shouldRender;
+	}
+
+	private async Task HandleSave()
+	{
+		// _shouldRender = true;
+		await DemoDataService.UpdateEmployeeAsync(_employeeDto);
+		await OnEmployeeUpdated.InvokeAsync();
+	}
+}
