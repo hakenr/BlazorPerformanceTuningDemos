@@ -1,0 +1,26 @@
+﻿@page "/too-many-components-optimized"
+@inherits MeasuredComponentBase
+<h3>Too Many Components - Optimized</h3>
+
+<HxButton OnClick="StateHasChanged" Text="Rerender" Color="ThemeColor.Primary" />
+
+<table class="table">
+	@foreach (var i in Enumerable.Range(1, 1000))
+	{
+		<tr>
+			<td>@i</td>
+			<td>@_badge("OK")</td>
+			<td>
+				@_icon(BootstrapIcon.Floppy)
+				@_icon(BootstrapIcon.Pencil)
+				@_icon(BootstrapIcon.Copy)
+				@_icon(BootstrapIcon.Trash)
+			</td>
+		</tr>
+	}
+</table>
+
+@code {
+	private RenderFragment<string> _badge = (content) => @<span class="badge bg-success">@content</span>;
+	private RenderFragment<BootstrapIcon> _icon = (icon) => @<i class="hx-icon bi-@icon.Name"></i>;
+}

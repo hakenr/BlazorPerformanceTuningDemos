@@ -1,0 +1,22 @@
+﻿@page "/too-many-components-virtualize"
+@inherits MeasuredComponentBase
+<h3>Too Many Components - Virtualize</h3>
+
+<HxButton OnClick="StateHasChanged" Text="Rerender" Color="ThemeColor.Primary" />
+
+<table class="table">
+	<Virtualize Items="Enumerable.Range(1, 1000).ToList()" ItemSize="41">
+		<ItemContent Context="i">
+			<TableRow>
+				<TableCell>@i</TableCell>
+				<TableCell><HxBadge Color="ThemeColor.Success">OK</HxBadge></TableCell>
+				<TableCell>
+					<HxIcon Icon="BootstrapIcon.Floppy" />
+					<HxIcon Icon="BootstrapIcon.Pencil" />
+					<HxIcon Icon="BootstrapIcon.Copy" />
+					<HxIcon Icon="BootstrapIcon.Trash" />
+				</TableCell>
+			</TableRow>
+		</ItemContent>
+	</Virtualize>
+</table>

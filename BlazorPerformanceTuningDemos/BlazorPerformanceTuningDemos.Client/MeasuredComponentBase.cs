@@ -34,12 +34,20 @@ namespace BlazorPerformanceTuningDemos.Client
 			return base.OnAfterRenderAsync(firstRender);
 		}
 
+		protected override bool ShouldRender()
+		{
+			DumpMeasurementPoint();
+
+			return base.ShouldRender();
+		}
+
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
 			DumpMeasurementPoint();
 
 			base.BuildRenderTree(builder);
 		}
+
 
 		protected void DumpMeasurementPoint([CallerMemberName] string measurementPointName = null, string measurementPointNameSuffix = null)
 		{

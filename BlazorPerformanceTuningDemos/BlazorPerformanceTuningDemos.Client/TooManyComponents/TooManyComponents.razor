@@ -1,0 +1,21 @@
+﻿@page "/too-many-components"
+@inherits MeasuredComponentBase
+<h3>Too Many Components</h3>
+
+<HxButton OnClick="StateHasChanged" Text="Rerender" Color="ThemeColor.Primary" />
+
+<table class="table">
+	@foreach (var i in Enumerable.Range(1, 1000))
+	{
+		<TableRow>
+			<TableCell>@i</TableCell>
+			<TableCell><HxBadge Color="ThemeColor.Success">OK</HxBadge></TableCell>
+			<TableCell>
+				<HxIcon Icon="BootstrapIcon.Floppy" />
+				<HxIcon Icon="BootstrapIcon.Pencil" />
+				<HxIcon Icon="BootstrapIcon.Copy" />
+				<HxIcon Icon="BootstrapIcon.Trash" />
+			</TableCell>
+		</TableRow>
+	}
+</table>
