@@ -1,0 +1,8 @@
+﻿<td>@ChildContent</td>
+
+@code {
+	[Parameter] public TableCellParameters Parameters { get; set; }
+	[Parameter] public RenderFragment ChildContent { get; set; } // prevents the diff to optimize the rendering
+
+	public record TableCellParameters(string Parameter1, string Parameter2, string Parameter3, string Parameter4, string Parameter5, string Parameter6, string Parameter7, string Parameter8, string Parameter9, string Parameter10);
+}

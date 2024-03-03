@@ -1,0 +1,6 @@
+﻿<td>@ChildContent</td>
+
+@code {
+	[Parameter] public string Parameter { get; set; }
+	[Parameter] public RenderFragment ChildContent { get; set; } // prevents the diff to optimize the rendering
+}

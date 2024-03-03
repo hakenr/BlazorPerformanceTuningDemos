@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPerformanceTuningDemos", "BlazorPerformanceTuningDemos\BlazorPerformanceTuningDemos\BlazorPerformanceTuningDemos.csproj", "{2F23861D-4BAC-4398-A2E8-6B6746F07168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPerformanceTuningDemos.Client", "BlazorPerformanceTuningDemos\BlazorPerformanceTuningDemos.Client\BlazorPerformanceTuningDemos.Client.csproj", "{5C6918B2-D4C7-4AE1-91AF-CC2AE56A87B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F23861D-4BAC-4398-A2E8-6B6746F07168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F23861D-4BAC-4398-A2E8-6B6746F07168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F23861D-4BAC-4398-A2E8-6B6746F07168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F23861D-4BAC-4398-A2E8-6B6746F07168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C6918B2-D4C7-4AE1-91AF-CC2AE56A87B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C6918B2-D4C7-4AE1-91AF-CC2AE56A87B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C6918B2-D4C7-4AE1-91AF-CC2AE56A87B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C6918B2-D4C7-4AE1-91AF-CC2AE56A87B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4EFCC86-EE1A-4048-B96B-618DAB4B39D6}
+	EndGlobalSection
+EndGlobal

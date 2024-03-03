@@ -1,0 +1,45 @@
+﻿@page "/parameters-count"
+@inherits MeasuredComponentBase
+
+<h3>Parameters Count</h3>
+
+<button @onclick="StateHasChanged">Rerender</button>
+
+<table>
+	@foreach (var i in Enumerable.Range(1, 10000))
+	{
+		<tr>
+@*
+			<TableCell_ManyParameters Parameter1="@i.ToString()"
+									  Parameter2="@i.ToString()"
+									  Parameter3="@i.ToString()"
+									  Parameter4="@i.ToString()"
+									  Parameter5="@i.ToString()"
+									  Parameter6="@i.ToString()"
+									  Parameter7="@i.ToString()"
+									  Parameter8="@i.ToString()"
+									  Parameter9="@i.ToString()"
+									  Parameter10="@i.ToString()">
+				@i
+			</TableCell_ManyParameters>
+
+			<TableCell_SingleParameter Parameter="@i.ToString()">@i</TableCell_SingleParameter>
+*@
+			<TableCell_ComplexParameter Parameters="new TableCell_ComplexParameter.TableCellParameters(
+									  i.ToString(),
+									  i.ToString(),
+									  i.ToString(),
+									  i.ToString(),
+									  i.ToString(),
+									  i.ToString(),
+									  i.ToString(),
+									  i.ToString(),
+									  i.ToString(),
+									  i.ToString())">
+				@i
+			</TableCell_ComplexParameter>
+@*
+ *@
+		</tr>
+	}
+</table>
