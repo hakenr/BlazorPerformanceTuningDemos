@@ -1,4 +1,3 @@
-using BlazorPerformanceTuningDemos.Client.Pages;
 using BlazorPerformanceTuningDemos.Components;
 
 var builder = WebApplication.CreateBuilder(args);

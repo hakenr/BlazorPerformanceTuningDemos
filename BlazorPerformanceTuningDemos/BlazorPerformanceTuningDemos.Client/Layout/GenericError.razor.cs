@@ -43,7 +43,7 @@ public partial class GenericError : IAsyncDisposable
 
 	private async Task EnsureJsModuleAsync()
 	{
-		_jsModule ??= await JsRuntime.ImportModuleAsync("./Pages/Errors/GenericError.razor.js");
+		_jsModule ??= await JsRuntime.ImportModuleAsync("./Layout/GenericError.razor.js");
 	}
 
 	private async Task HandleCopyExceptionDetailsToClipboardClick()
