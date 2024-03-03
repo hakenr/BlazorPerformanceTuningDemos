@@ -9,7 +9,6 @@
 	@foreach (var i in Enumerable.Range(1, 10000))
 	{
 		<tr>
-@*
 			<TableCell_ManyParameters Parameter1="@i.ToString()"
 									  Parameter2="@i.ToString()"
 									  Parameter3="@i.ToString()"
@@ -23,8 +22,8 @@
 				@i
 			</TableCell_ManyParameters>
 
+			@*
 			<TableCell_SingleParameter Parameter="@i.ToString()">@i</TableCell_SingleParameter>
-*@
 			<TableCell_ComplexParameter Parameters="new TableCell_ComplexParameter.TableCellParameters(
 									  i.ToString(),
 									  i.ToString(),
@@ -38,8 +37,14 @@
 									  i.ToString())">
 				@i
 			</TableCell_ComplexParameter>
-@*
- *@
+			*@
 		</tr>
 	}
 </table>
+
+@*
+	TableCell_ManyParameters ~930ms
+	TableCell_ComplexParameter ~550ms
+	(TableCell_SingleParameter ~460ms)
+	BTW: for vs foreach
+*@
