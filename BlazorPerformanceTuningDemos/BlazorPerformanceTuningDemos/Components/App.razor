@@ -5,16 +5,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="app.css" />
+	<!-- Bootstrap CSS (you can set the Bootstrap flavor with a parameter) -->
+	@((MarkupString)HxSetup.RenderBootstrapCssReference())
+
+	<!-- Default values for additional CSS Variables (+ import Bootstrap Icons) -->
+	<link href="_content/Havit.Blazor.Components.Web.Bootstrap/defaults.css" rel="stylesheet" />
+
+	<!-- Blazor CSS Isolation -->
     <link rel="stylesheet" href="BlazorPerformanceTuningDemos.styles.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <link rel="stylesheet" href="app.css" />
     <HeadOutlet @rendermode="new InteractiveWebAssemblyRenderMode(prerender : false)" />
 </head>
 
 <body>
 	<Routes @rendermode="new InteractiveWebAssemblyRenderMode(prerender : false)" />
     <script src="_framework/blazor.web.js"></script>
+
+	<!-- JavaScript Bundle with Popper -->
+	@((MarkupString)HxSetup.RenderBootstrapJavaScriptReference())
 </body>
 
 </html>

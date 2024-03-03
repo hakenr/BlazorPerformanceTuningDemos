@@ -1,0 +1,46 @@
+﻿@{
+	RenderFragment copyToClipboardButton =
+            @<HxButton OnClick="HandleCopyExceptionDetailsToClipboardClick" CssClass="text-secondary" Icon="BootstrapIcon.Clipboard" />;
+}
+
+<div class="container-lg generic-error">
+	<div class="text-center my-4">
+		<img src="/oops.svg" class="mw-100" width="500" alt="Oops">
+	</div>
+
+	<div class="text-center">
+		<h1>Oops...</h1>
+		<p class="lead">Oops!</p>
+		<HxButton Color="ThemeColor.Primary" OnClick="this.OnRecover" Text="Recover" CssClass="me-2" />
+		<HxButton Color="ThemeColor.Secondary" OnClick="HandleRestartClick" Text="Restart" />
+	</div>
+
+	<HxAccordion CssClass="my-4">
+		<HxAccordionItem>
+			<HeaderTemplate>
+				@Exception.GetType().Name: @Exception.Message
+			</HeaderTemplate>
+			<BodyTemplate>
+				<div class="position-relative pe-4">
+					<div class="position-absolute top-0 end-0">
+						<HxTooltip WrapperCssClass="@(_copiedToClipboard ? "d-none" : null)" @ref="_copyToClipboardTooltip" Text="Copy to clipboard">
+							@copyToClipboardButton
+						</HxTooltip>
+
+						<HxTooltip WrapperCssClass="@(_copiedToClipboard ? null : "d-none")" @ref="_copiedToClipboardTooltip" Text="Copied to clipboard">
+							@copyToClipboardButton
+						</HxTooltip>
+					</div>
+					<code>
+						<pre class="mb-0">
+							@GetFullExceptionText()
+						</pre>
+					</code>
+				</div>
+			</BodyTemplate>
+		</HxAccordionItem>
+	</HxAccordion>
+	<p class="text-center pt-2">
+		Operation ID: @_traceId
+	</p>
+</div>
