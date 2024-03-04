@@ -1,0 +1,30 @@
+﻿@page "/too-many-events"
+@inject IDemoDataService DemoDataService
+<h3>Too Many Events</h3>
+
+<HxInputText @bind-Value="_searchTerm"
+			 @bind-Value:after="HandleSearchTermChanged"
+			 BindEvent="BindEvent.OnInput"
+			 Placeholder="Search" />
+
+<HxProgressIndicator InProgress="_inProgress" Delay="0">
+	<ul class="pt-3">
+		@foreach (var employee in _employeesFound)
+		{
+			<li>@employee.Name</li>
+		}
+	</ul>
+</HxProgressIndicator>
+
+@code {
+	private string _searchTerm;
+	private bool _inProgress;
+	private IEnumerable<EmployeeDto> _employeesFound = [];
+
+	private async Task HandleSearchTermChanged()
+	{
+		_inProgress = true;
+		_employeesFound = await DemoDataService.FindEmployeesByNameAsync(_searchTerm, limitCount: 10);
+		_inProgress = false;
+	}
+}
