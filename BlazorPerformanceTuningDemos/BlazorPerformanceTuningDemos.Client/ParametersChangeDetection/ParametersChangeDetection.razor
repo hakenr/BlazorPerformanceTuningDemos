@@ -1,7 +1,7 @@
-﻿@page "/expensive-data-reload"
+﻿@page "/parameters-change-detection"
 @inject IDemoDataService DemoDataService
 
-<HxListLayout Title="Expensive Data Reload"
+<HxListLayout Title="Parameters Change Detection"
 			  TFilterModel="EmployeesFilterDto"
 			  @bind-FilterModel="filterModel"
 			  @bind-FilterModel:after="gridComponent.RefreshDataAsync">
@@ -29,21 +29,12 @@
 			</Columns>
 		</HxGrid>
 	</DataTemplate>
-@* 
-	<DetailTemplate>
-		@if (currentEmployee != null)
-		{
-			<EmployeeDetail EmployeeId="@currentEmployee.Id" OnEmployeeUpdated="gridComponent.RefreshDataAsync" />
-		}
-	</DetailTemplate>
- *@
 </HxListLayout>
 
 @if (currentEmployee != null)
 {
-	<EmployeeDetail_Guarded2 EmployeeId="@currentEmployee.Id" OnEmployeeUpdated="gridComponent.RefreshDataAsync" />
+	<EmployeeDetail EmployeeId="@currentEmployee.Id" />
 }
-
 
 @code {
 	private EmployeeDto currentEmployee;
@@ -59,3 +50,10 @@
 			};
 	}
 }
+
+@*
+	OK: primitive immutable types (string, int, bool, DateTime, Guid, Type, decimal, ...)
+	BAD: RenderFragment, class/record!
+	OK starting .NET9: EventCallback, EventCallback<T>, ...!
+		https://github.com/dotnet/aspnetcore/commit/998c6c64bc58e818b85211f63df9d248579d4662
+*@
