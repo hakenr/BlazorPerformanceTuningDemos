@@ -2,7 +2,7 @@
 @inject IDemoDataService DemoDataService
 @implements IDisposable
 
-<h3>Too Many Events</h3>
+<h3>Too Many Events - Debounced</h3>
 
 <HxInputText @bind-Value="_searchTerm"
 			 @bind-Value:after="HandleSearchTermChanged"
