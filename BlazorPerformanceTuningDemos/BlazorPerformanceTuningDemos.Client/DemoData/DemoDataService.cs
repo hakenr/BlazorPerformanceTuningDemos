@@ -547,7 +547,7 @@ public class DemoDataService : IDemoDataService
 	{
 		_logger.LogInformation("DemoDataService.GetAllEmployeesAsync() called.");
 
-		await Task.Delay(150, cancellationToken); // simulate server call
+		await Task.Delay(1550, cancellationToken); // simulate server call
 
 		return _employees.ToList();
 	}

@@ -1,0 +1,27 @@
+﻿@inject IEmployeesDataStore EmployeesDataStore
+
+<HxSelect Data="@_employees"
+		  @bind-Value:get="Value"
+		  @bind-Value:set="HandleValueChanged"
+		  ValueSelector="employee => employee.Id"
+		  TextSelector="employee => employee.Name"
+		  Nullable="false"
+		  NullDataText="Loading..." />
+
+@code {
+	[Parameter] public int Value { get; set; }
+	[Parameter] public EventCallback<int> ValueChanged { get; set; }
+
+	private IEnumerable<EmployeeDto> _employees;
+
+	protected override async Task OnInitializedAsync()
+	{
+		_employees = await EmployeesDataStore.GetAllAsync();
+	}
+
+	private async Task HandleValueChanged(int newValue)
+	{
+		Value = newValue;
+		await ValueChanged.InvokeAsync(newValue);
+	}
+}

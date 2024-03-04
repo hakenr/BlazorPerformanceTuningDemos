@@ -1,0 +1,27 @@
+﻿@page "/data-caching-no-caching"
+
+@inject IDemoDataService DemoDataService
+
+<h3>Data Caching - No Caching</h3>
+
+<EmployeePicker_NoCaching @bind-Value="_employee1Id" />
+<EmployeePicker_NoCaching @bind-Value="_employee2Id" />
+<EmployeePicker_NoCaching @bind-Value="_employee3Id" />
+
+<p>Selected employee 1: @(_employees is not null ? _employees[_employee1Id].Name : "...")</p>
+<p>Selected employee 2: @(_employees is not null ? _employees[_employee2Id].Name : "...")</p>
+<p>Selected employee 3: @(_employees is not null ? _employees[_employee3Id].Name : "...")</p>
+
+@code {
+	private int _employee1Id = 1;
+	private int _employee2Id = 2;
+	private int _employee3Id = 3;
+
+	private Dictionary<int, EmployeeDto> _employees;
+
+	protected override async Task OnInitializedAsync()
+	{
+		var employees = await DemoDataService.GetAllEmployeesAsync();
+		_employees = employees.ToDictionary(e => e.Id);
+	}
+}

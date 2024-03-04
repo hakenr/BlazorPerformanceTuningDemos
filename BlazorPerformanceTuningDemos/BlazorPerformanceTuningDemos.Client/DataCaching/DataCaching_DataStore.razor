@@ -1,0 +1,33 @@
+﻿@page "/data-caching-data-store"
+
+@inject IEmployeesDataStore EmployeesDataStore
+
+<h3>Data Caching - In-memory DataStore</h3>
+
+<EmployeePicker_Cached @bind-Value="_employee1Id" />
+<EmployeePicker_Cached @bind-Value="_employee2Id" />
+<EmployeePicker_Cached @bind-Value="_employee3Id" />
+
+<p>Selected employee 1: @(EmployeesDataStore.GetByKeyOrDefault(_employee1Id)?.Name ?? "...")</p>
+<p>Selected employee 2: @(EmployeesDataStore.GetByKeyOrDefault(_employee2Id)?.Name ?? "...")</p>
+<p>Selected employee 3: @(EmployeesDataStore.GetByKeyOrDefault(_employee3Id)?.Name ?? "...")</p>
+
+<HxButton OnClick="HandleRefresh" Text="Refresh" Color="ThemeColor.Secondary" />
+
+@code {
+	private int _employee1Id = 1;
+	private int _employee2Id = 2;
+	private int _employee3Id = 3;
+
+
+	protected override async Task OnInitializedAsync()
+	{
+		await EmployeesDataStore.EnsureDataAsync();
+	}
+
+	private async Task HandleRefresh()
+	{
+		EmployeesDataStore.Clear();
+		await EmployeesDataStore.EnsureDataAsync();
+	}
+}
