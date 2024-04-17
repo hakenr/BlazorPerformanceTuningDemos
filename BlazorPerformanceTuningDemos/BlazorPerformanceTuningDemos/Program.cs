@@ -1,6 +1,18 @@
+using BlazorPerformanceTuningDemos.Client.DataCaching;
+using BlazorPerformanceTuningDemos.Client.DemoData;
 using BlazorPerformanceTuningDemos.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddHxServices();
+builder.Services.AddHxMessenger();
+builder.Services.AddHxMessageBoxHost();
+
+builder.Services.AddSingleton<IDemoDataService, DemoDataService>();
+builder.Services.AddSingleton<IEmployeesDataStore, EmployeesDataStore>();
+
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
