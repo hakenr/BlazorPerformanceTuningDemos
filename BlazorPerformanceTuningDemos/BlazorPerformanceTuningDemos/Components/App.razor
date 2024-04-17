@@ -15,13 +15,13 @@
 	<link rel="stylesheet" href="BlazorPerformanceTuningDemos.styles.css" />
 
 	<link rel="stylesheet" href="app.css" />
-	<HeadOutlet @rendermode="new InteractiveWebAssemblyRenderMode(prerender : true)" />
+	<HeadOutlet @rendermode="new InteractiveWebAssemblyRenderMode(prerender : false)" />
 
 	<blazor-bug-workaround />
 </head>
 
 <body>
-	<Routes @rendermode="new InteractiveWebAssemblyRenderMode(prerender : true)" />
+	<Routes @rendermode="new InteractiveWebAssemblyRenderMode(prerender : false)" />
 	<script src="_framework/blazor.web.js"></script>
 
 	<!-- JavaScript Bundle with Popper -->
