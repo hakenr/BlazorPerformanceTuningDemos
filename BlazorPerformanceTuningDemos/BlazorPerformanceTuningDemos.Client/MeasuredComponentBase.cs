@@ -36,7 +36,7 @@ namespace BlazorPerformanceTuningDemos.Client
 
 		protected override bool ShouldRender()
 		{
-			DumpMeasurementPoint();
+			DumpMeasurementPoint(suppressMessage: true);
 
 			return base.ShouldRender();
 		}
@@ -49,9 +49,12 @@ namespace BlazorPerformanceTuningDemos.Client
 		}
 
 
-		protected void DumpMeasurementPoint([CallerMemberName] string measurementPointName = null, string measurementPointNameSuffix = null)
+		protected void DumpMeasurementPoint([CallerMemberName] string measurementPointName = null, string measurementPointNameSuffix = null, bool suppressMessage = false)
 		{
-			Console.WriteLine($"[Measurement:{this.GetType().Name}.{measurementPointName}{measurementPointNameSuffix}] {_stopwatch.ElapsedMilliseconds}ms elapsed from previous measurement.");
+			if (!suppressMessage)
+			{
+				Console.WriteLine($"[Measurement:{this.GetType().Name}.{measurementPointName}{measurementPointNameSuffix}] {_stopwatch.ElapsedMilliseconds}ms elapsed from previous measurement.");
+			}
 			_stopwatch.Restart();
 		}
 	}
