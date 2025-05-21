@@ -33,7 +33,9 @@
 
 @if (currentEmployee != null)
 {
-	<EmployeeDetail EmployeeId="@currentEmployee.Id" />
+	<EmployeeDetail EmployeeId="@currentEmployee.Id"
+					OnEmployeeUpdated="gridComponent.RefreshDataAsync"
+					SaveButtonSettings="new ButtonSettings() { Size = ButtonSize.Large }" /> @* DEMO: remove this parameter assignment *@
 }
 
 @code {
@@ -44,10 +46,10 @@
 	private async Task<GridDataProviderResult<EmployeeDto>> GetGridData(GridDataProviderRequest<EmployeeDto> request)
 	{
 		return new GridDataProviderResult<EmployeeDto>()
-			{
-				Data = await DemoDataService.GetEmployeesDataFragmentAsync(filterModel, request.StartIndex, request.Count, request.CancellationToken),
-				TotalCount = await DemoDataService.GetEmployeesCountAsync(filterModel, request.CancellationToken)
-			};
+		{
+			Data = await DemoDataService.GetEmployeesDataFragmentAsync(filterModel, request.StartIndex, request.Count, request.CancellationToken),
+			TotalCount = await DemoDataService.GetEmployeesCountAsync(filterModel, request.CancellationToken)
+		};
 	}
 }
 
@@ -56,4 +58,5 @@
 	BAD: RenderFragment, class/record!
 	OK starting .NET9: EventCallback, EventCallback<T>, ...!
 		https://github.com/dotnet/aspnetcore/commit/998c6c64bc58e818b85211f63df9d248579d4662
+		https://github.com/dotnet/aspnetcore/blob/main/src/Components/Components/src/ChangeDetection.cs
 *@
