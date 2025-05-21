@@ -4,13 +4,14 @@
 {
 	<EditForm Model="_employeeDto">
 		<HxInputText Label="Name" @bind-Value="_employeeDto.Name" />
-		<HxSubmit Color="ThemeColor.Primary" OnValidClick="HandleSave">Save</HxSubmit>
+		<HxSubmit Color="ThemeColor.Primary" OnValidClick="HandleSave" Settings="SaveButtonSettings">Save</HxSubmit>
 	</EditForm>
 }
 
 @code {
 	[Parameter] public int EmployeeId { get; set; }
 	[Parameter] public EventCallback OnEmployeeUpdated { get; set; }
+	[Parameter] public ButtonSettings SaveButtonSettings { get; set; }
 
 	[Inject] protected IDemoDataService DemoDataService { get; set; }
 

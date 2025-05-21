@@ -18,6 +18,7 @@
 				TItem="EmployeeDto"
 				DataProvider="GetGridData"
 				@bind-SelectedDataItem="currentEmployee"
+				PreserveSelection="true"
 				PageSize="5"
 				Responsive="true">
 			<Columns>
@@ -29,11 +30,13 @@
 			</Columns>
 		</HxGrid>
 	</DataTemplate>
-@* 
+	@* 
 	<DetailTemplate>
 		@if (currentEmployee != null)
 		{
-			<EmployeeDetail EmployeeId="@currentEmployee.Id" OnEmployeeUpdated="gridComponent.RefreshDataAsync" />
+			<EmployeeDetail EmployeeId="@currentEmployee.Id"
+							OnEmployeeUpdated="gridComponent.RefreshDataAsync"
+							SaveButtonSettings="new ButtonSettings() { Size = ButtonSize.Large }" />
 		}
 	</DetailTemplate>
  *@
@@ -41,9 +44,10 @@
 
 @if (currentEmployee != null)
 {
-	<EmployeeDetail EmployeeId="@currentEmployee.Id" OnEmployeeUpdated="gridComponent.RefreshDataAsync" />
+	<EmployeeDetail_Guarded2 EmployeeId="@currentEmployee.Id"
+					OnEmployeeUpdated="gridComponent.RefreshDataAsync"
+					SaveButtonSettings="new ButtonSettings() { Size = ButtonSize.Large }" />
 }
-
 
 @code {
 	private EmployeeDto currentEmployee;
@@ -53,9 +57,9 @@
 	private async Task<GridDataProviderResult<EmployeeDto>> GetGridData(GridDataProviderRequest<EmployeeDto> request)
 	{
 		return new GridDataProviderResult<EmployeeDto>()
-			{
-				Data = await DemoDataService.GetEmployeesDataFragmentAsync(filterModel, request.StartIndex, request.Count, request.CancellationToken),
-				TotalCount = await DemoDataService.GetEmployeesCountAsync(filterModel, request.CancellationToken)
-			};
+		{
+			Data = await DemoDataService.GetEmployeesDataFragmentAsync(filterModel, request.StartIndex, request.Count, request.CancellationToken),
+			TotalCount = await DemoDataService.GetEmployeesCountAsync(filterModel, request.CancellationToken)
+		};
 	}
 }

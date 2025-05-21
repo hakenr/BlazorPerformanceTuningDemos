@@ -4,24 +4,26 @@
 {
 	<EditForm Model="_employeeDto">
 		<HxInputText Label="Name" @bind-Value="_employeeDto.Name" />
-		<HxSubmit Color="ThemeColor.Primary" OnValidClick="HandleSave">Save</HxSubmit>
+		<HxSubmit Color="ThemeColor.Primary" OnValidClick="HandleSave" Settings="SaveButtonSettings">Save</HxSubmit>
 	</EditForm>
 }
 
 @code {
 	[Parameter] public int EmployeeId { get; set; }
 	[Parameter] public EventCallback OnEmployeeUpdated { get; set; }
+	[Parameter] public ButtonSettings SaveButtonSettings { get; set; }
 
 	[Inject] protected IDemoDataService DemoDataService { get; set; }
 
 	private int? _currentEmployeeId;
 	private EmployeeDto _employeeDto;
-	private bool _shouldRender = true;
+	private bool _shouldRender = false;
 
 	protected override async Task OnParametersSetAsync()
 	{
 		Console.WriteLine($"EmployeeDetail.OnParametersSetAsync: {EmployeeId}");
 
+		// PERF: SaveButtonSettings changes not tracked, only EmployeeId change triggers reload and rerender
 		if (_currentEmployeeId != EmployeeId)
 		{
 			_currentEmployeeId = EmployeeId;
@@ -36,12 +38,14 @@
 
 	protected override bool ShouldRender()
 	{
-		return _shouldRender;
+		var shouldRenderNow = _shouldRender;
+		_shouldRender = false; // reset for next render
+		return shouldRenderNow;
 	}
 
 	private async Task HandleSave()
 	{
-		// _shouldRender = true;
+		_shouldRender = true; // title won't be updated without this
 		await DemoDataService.UpdateEmployeeAsync(_employeeDto);
 		await OnEmployeeUpdated.InvokeAsync();
 	}
